@@ -1,0 +1,14 @@
+{
+  "name": "regexone-cn",
+  "version": "1.0.0",
+  "description": "regexone.com 中文翻译",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "author": "imageslr",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.8.2"
+  }
+}
