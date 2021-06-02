@@ -11,5 +11,9 @@ module.exports = {
   themeConfig: {
     repo: "imageslr/regexone-cn",
     editLinkText: "编辑此页面",
+
+    nav: [
+      { text: 'RegexOne 官方网站', link: 'https://regexone.com' },
+    ]
   },
 };

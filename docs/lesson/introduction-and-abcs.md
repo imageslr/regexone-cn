@@ -13,5 +13,5 @@
   :data='[{type: "match", text: "abcdefg"}, {type: "match", text: "abcde"}, {type: "match", text: "abc"}]'
   solutionText="输入前三个字符"
   editorVal="abc"
-  nextUrl="/letters-and-digits.html"
+  nextUrl="/lesson/letters-and-digits.html"
 />
