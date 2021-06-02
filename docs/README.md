@@ -7,6 +7,7 @@ actionLink: /lesson/introduction_and_abcs
 ---
 
 <Exercise 
+  style="max-width: 750px"
   title="练习 1：匹配字符"
   :data='[{type: "match", text: "abcdefg"}, {type: "match", text: "abcde"}, {type: "match", text: "abc"}]'
   solutionText="输入前三个字符"

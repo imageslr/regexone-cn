@@ -1,4 +1,6 @@
 module.exports = {
+  base: "/regexone-cn/",
+
   title: "RegexOne 中文 - 通过简单的交互式练习来学习正则表达式",
   description: "通过简单的交互式练习来学习正则表达式｜regexone.com 中文翻译",
   head: [
