@@ -14,6 +14,15 @@ module.exports = {
 
     nav: [
       { text: 'RegexOne 官方网站', link: 'https://regexone.com' },
-    ]
+    ],
+
+    sidebar: [{
+        title: "课程",
+        children: [
+          "/lesson/introduction_and_abcs",
+          "/lesson/letters_and_digits",
+          "/lesson/wildcards_dot"
+        ]
+      }]
   },
 };
