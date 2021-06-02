@@ -6,9 +6,12 @@
 
 下面是几行文本，当您在输入框中输入模式时，请观察每行的匹配字符是如何变化的。要继续下一课，您需要使用每个课程中介绍的新的语法 (syntax) 和概念，写出能够匹配给定的每行文本的模式。
 
-::: warning 注意
-目前还没有实现正则表达式的交互式组件
-:::
-
 请尝试写一个能够匹配下面三行的模式，**它可能就像每行上的常见字母一样简单。**
 
+<Exercise 
+  title="练习 1：匹配字符"
+  :data='[{type: "match", text: "abcdefg"}, {type: "match", text: "abcde"}, {type: "match", text: "abc"}]'
+  solutionText="输入前三个字符"
+  editorVal="abc"
+  nextUrl="/letters-and-digits.html"
+/>

@@ -11,24 +11,13 @@
           <td class="text">Text</td>
           <td>Result</td>
         </tr>
-        <tr
-          class="problem"
-          v-for="(item, index) in problems"
+        <Problem
+          v-for="(item, index) in data"
           :key="index"
-        >
-          <td
-            class="task"
-            v-text="item.task"
-          />
-          <td
-            class="text"
-            v-text="item.text"
-          />
-          <td
-            class="result"
-            v-text="item.result"
-          />
-        </tr>
+          :type="item.type"
+          :text="item.text"
+          ref="problems"
+        />
       </tbody>
     </table>
     <div class="input_and_continue">
@@ -40,21 +29,22 @@
         autocorrect="off"
         spellcheck="false"
         placeholder="Type your pattern"
+        v-model="input"
       >
       <button
         class="continue"
         :class="{ disabled }"
         :disabled="disabled"
+        @click="$router.push(nextUrl)"
       >Continue ›</button>
     </div>
     <div
       class="solution"
       v-show="showAnswer"
-    >
-      <span class="title">答案：</span>
-      <span>{{ solutionText }} <a
-          class="editor_val"
-        >{{ editorVal}}</a>。</span>
+    >答案：{{ solutionText }} <a
+        class="editor_val"
+        @click="input = editorVal"
+      >{{ editorVal}}</a>。
     </div>
     <div class="solution_hint">
       解决上述任务以继续下一个问题，或者查看<a
@@ -67,23 +57,92 @@
 
 <script>
 export default {
+  editorInputTimeoutTimer: null,
+  editorLastInput: null,
+
   props: {
-    problems: Array,
+    data: Array,
     title: String,
     solutionText: String,
-    editorVal: String
+    editorVal: String,
+    nextUrl: String
   },
   data() {
     return {
       showAnswer: false,
+      input: "",
+      disabled: true,
     };
   },
-  computed: {
-    disabled() {
-      return true;
+  watch: {
+    input () {
+      this.update()
+    }
+  },
+  methods: {
+    update() {
+      null != this.editorInputTimeoutTimer &&
+        clearTimeout(this.editorInputTimeoutTimer);
+      this.editorInputTimeoutTimer = setTimeout(() => {
+        this.updateFromInput();
+        this.editorInputTimeoutTimer = null;
+      }, 64);
+    },
+    updateFromInput() {
+      var { input } = this.$data;
+      if (input != this.editorLastInput) {
+        var pattern = this.recurseCompletePattern(input, 0, input.length, null)[1];
+        var verify = true;
+        this.$refs.problems.forEach(k => verify = k.verifyInput(input, pattern) && verify)
+        verify ? (this.disabled = false) : (this.disabled = true);
+        this.editorLastInput = input;
+      }
+    },
+    recurseCompletePattern(a /* input */, c/* i */, b/* input.length */, d/* appendix */) {
+      for (var g = "", k = b, e = c; e <= b; e++) {
+        var f = "";
+        0 < e && (f = a.charAt(e - 1));
+        var h = a.charAt(e);
+        if (e == b) {
+          null != d && (g += d);
+          break;
+        }
+        if (
+          (")" == d && "}" == h && "\\" != f) ||
+          (")" == d && "]" == h && "\\" != f) ||
+          ("]" == d && ")" == h && "\\" != f) ||
+          ("]" == d && "}" == h && "\\" != f) ||
+          ("}" == d && "]" == h && "\\" != f) ||
+          ("}" == d && ")" == h && "\\" != f)
+        ) {
+          g += d;
+          k = e;
+          break;
+        } else if (h == d && e < b) {
+          g += h;
+          k = e + 1;
+          break;
+        } else if ("(" == h && "\\" != f)
+          (f = this.recurseCompletePattern(a, e + 1, b, ")")),
+            (g += h + f[1]),
+            (e += f[0]);
+        else if ("[" == h && "\\" != f)
+          (f = this.recurseCompletePattern(a, e + 1, b, "]")),
+            (g += h + f[1]),
+            (e += f[0]);
+        else if ("{" == h && "\\" != f)
+          (f = this.recurseCompletePattern(a, e + 1, b, "}")),
+            (g += h + f[1]),
+            (e += f[0]);
+        else if (e < b) g += h;
+        else break;
+      }
+      return [k - c, g];
     },
   },
 };
+
+function Problem(a, b, c, d) {}
 </script>
 
 <style lang="scss">
@@ -129,51 +188,6 @@ export default {
     background-color: transparent;
     border: none;
   }
-
-  .problem {
-    td {
-      border: none;
-      padding: 0.5em 0 0 0;
-
-      &.task {
-        width: 1em;
-        padding-right: 1.5em;
-        vertical-align: top;
-        text-align: center;
-        text-transform: capitalize;
-        font-size: 0.9375em;
-      }
-
-      &.text {
-        font-size: 0.9375em;
-        padding-right: 0.5em;
-        white-space: pre;
-        vertical-align: top;
-        color: black;
-
-        .match_succeeded {
-          color: #5ac420;
-        }
-
-        .match_failed {
-          color: #f53b27;
-        }
-      }
-
-      &.result {
-        width: 1em;
-        vertical-align: top;
-        text-align: center;
-        opacity: 0;
-        transition: opacity 225ms;
-
-        &.failed {
-          opacity: 1;
-          transition: opacity 225ms;
-        }
-      }
-    }
-  }
 }
 
 .input_and_continue {
@@ -206,11 +220,12 @@ export default {
     text-align: center;
     font-size: 1.125em;
     border: 0;
-    background: #5ac420;
+    background: #42b983;
     color: #fff;
     transition: background-color 225ms;
     box-sizing: border-box;
     cursor: pointer;
+    border-radius: 0 0.15em 0.15em 0;
 
     &.disabled {
       background: #c9c9c9;
@@ -223,9 +238,13 @@ export default {
 .solution {
   margin: 1em 0 0 0;
   padding: 0.75em;
-  font-size: 0.925em;
+  font-size: 0.9em;
   border-radius: 0.25em 0.25em 0.25em 0.25em;
   background-color: #f5f5f5;
+}
+
+.editor_val {
+  cursor: pointer;
 }
 
 .solution_hint {
