@@ -1,4 +1,4 @@
-# 课程 1½：数字
+# 课程 1½：数字 123s
 
 字符包括普通的字母，也包括数字。事实上，数字 0-9 也是字符，如果您查看 [ASCII表](https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters)，会发现它们是按顺序列出的。
 
