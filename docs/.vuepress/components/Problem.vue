@@ -72,7 +72,7 @@ export default {
           return this.markFailed();
         }
         if ("skip" == this.type) {
-          if (null == res1) return this.clearResult(), false;
+          if (null == res1) return this.clearResult(), true;
           var html =
             this.escapeHtml(this.text.substring(0, res1.index)) +
             "<span class='match_failed'>" +
