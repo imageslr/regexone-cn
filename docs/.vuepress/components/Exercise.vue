@@ -246,6 +246,16 @@ function Problem(a, b, c, d) {}
       transition: background-color 225ms;
     }
   }
+
+  @media (max-width: 768px) {
+    .exercise_input_field {
+      width: 100%;
+    }
+
+    .continue {
+      width: 100%;
+    }
+  }
 }
 
 .solution {
