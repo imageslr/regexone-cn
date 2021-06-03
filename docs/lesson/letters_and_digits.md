@@ -9,7 +9,6 @@
 <Exercise 
   title="练习 1½：匹配数字"
   :data='[{type: "match", text: "abc123xyz"}, {type: "match", text: "define \"123\""}, {type: "match", text: "var g = 123;"}]'
-  solutionText="输入所有行共有的数字"
-  editorVal="123"
+  solution="输入所有行共有的数字 {123}。"
   nextUrl="/lesson/wildcards_dot.html"
 />

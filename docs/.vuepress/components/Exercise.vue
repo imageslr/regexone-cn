@@ -41,10 +41,10 @@
     <div
       class="solution"
       v-show="showAnswer"
-    >答案：{{ solutionText }} <a
+    >答案：{{ solutionPrefix }}<a
         class="editor_val"
-        @click="input = editorVal"
-      >{{ editorVal}}</a>。
+        @click="input = solutionVal"
+      >{{ solutionVal }}</a>{{ solutionAppendix }}
     </div>
     <div class="solution_hint">
       解决上述任务以继续下一个问题，或者查看<a
@@ -63,8 +63,7 @@ export default {
   props: {
     data: Array,
     title: String,
-    solutionText: String,
-    editorVal: String,
+    solution: String,
     nextUrl: String
   },
   data() {
@@ -73,6 +72,20 @@ export default {
       input: "",
       disabled: true,
     };
+  },
+  computed: {
+    solutionVal () {
+      let res = this.solution.match(/(?<={).*(?=})/)
+      return res && res[0]
+    },
+    solutionPrefix () {
+      let res = this.solution.match(/.*(?={.*})/)
+      return res && res[0]
+    },
+    solutionAppendix () {
+      let res = this.solution.match(/(?<={.*}).*/)
+      return res && res[0]
+    },
   },
   watch: {
     input () {
