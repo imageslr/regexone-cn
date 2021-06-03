@@ -9,5 +9,4 @@
 <Exercise 
   title="练习 2：使用通配符"
   :data='[{type: "match", text: "cat."}, {type: "match", text: "896."}, {type: "match", text: "?=+."}, {type: "skip", text: "abc1"}]'
-  nextUrl="/lesson/matching_characters.html"
 >您可以使用 <SolutionLink text="...\." /> 来匹配前三个 (通配) 字符，同时转义最后一个通配符元字符来匹配到句点。这保证了它不会匹配到第四行的 '1'。</Exercise>

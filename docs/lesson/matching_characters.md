@@ -9,6 +9,5 @@
 <Exercise 
   title="练习 3：匹配特定字符"
   :data='[{type: "match", text: "can"}, {type: "match", text: "man"}, {type: "match", text: "fan"}, {type: "skip", text: "dan"}, {type: "skip", text: "ran"}, {type: "skip", text: "pan"}]'
-  nextUrl="/lesson/excluding_characters.html"
 >您可以使用表达式 <SolutionLink text="[cmf]an" /> 来只匹配 'can'、'man' 和 'fan'，而不匹配任何其他行。正如您将在下一课中看到的，您也可以使用逆表达式 (inverse expression) <SolutionLink text="[^drp]an" /> 来匹配任何以 'an' 结尾、但不以 'd'、'r' 或 'p' 开头的三个字母的单词。
 </Exercise>

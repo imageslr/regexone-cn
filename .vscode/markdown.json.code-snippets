@@ -22,7 +22,6 @@
 			"<Exercise", 
 			"  title=\"练习 $1：$2\"",
 			"  :data='[$3]'",
-			"  nextUrl=\"/lesson/$4.html\"",
 		  ">$5</Exercise>"
 		],
 		"description": "Exercise component"

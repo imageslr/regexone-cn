@@ -35,7 +35,7 @@
         class="continue"
         :class="{ disabled }"
         :disabled="disabled"
-        @click="$router.push(nextUrl)"
+        @click="$router.push(nextLink)"
       >Continue ›</button>
     </div>
     <div
@@ -70,6 +70,11 @@ export default {
       input: "",
       disabled: true,
     };
+  },
+  computed: {
+    nextLink () {
+      return this.nextUrl || getDefauleNextUrl(this.$site, this.$page)
+    }
   },
   watch: {
     input () {
@@ -141,6 +146,23 @@ export default {
     },
   },
 };
+
+function getDefauleNextUrl (site, page) {
+  const { sidebar } = site.themeConfig
+  const { regularPath } = page
+  let currentPath = regularPath.match(/^(.*).html$/)[1]
+  let nextPath = null
+  sidebar.some(group => {
+    return group.children.some((link, i) => {
+      if (link == currentPath) {
+        nextPath = group.children[i+1] + ".html" || null
+        return true
+      }
+      return false
+    })
+  })
+  return nextPath
+}
 </script>
 
 <style lang="scss">

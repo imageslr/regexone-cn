@@ -11,5 +11,4 @@
 <Exercise
   title="练习 5：匹配字符范围"
   :data='[{type: "match", text: "Ana"}, {type: "match", text: "Bob"}, {type: "match", text: "Cpc"}, {type: "skip", text: "aax"}, {type: "skip", text: "bby"}, {type: "skip", text: "ccz"}]'
-  nextUrl="/lesson/repeating_characters.html"
 >从上到下，每个位置的字符都是连续的，因此可以使用 <SolutionLink text="[A-C][n-p][a-c]" /> 中的不同范围来只匹配谦三行。</Exercise>
