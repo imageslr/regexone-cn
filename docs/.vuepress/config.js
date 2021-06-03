@@ -23,7 +23,9 @@ module.exports = {
         children: [
           "/lesson/introduction_and_abcs",
           "/lesson/letters_and_digits",
-          "/lesson/wildcards_dot"
+          "/lesson/wildcards_dot",
+          "/lesson/matching_characters",
+          "/lesson/excluding_characters"
         ]
       }]
   },
