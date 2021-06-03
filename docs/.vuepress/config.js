@@ -25,7 +25,9 @@ module.exports = {
           "/lesson/letters_and_digits",
           "/lesson/wildcards_dot",
           "/lesson/matching_characters",
-          "/lesson/excluding_characters"
+          "/lesson/excluding_characters",
+          "/lesson/character_ranges",
+          "/lesson/repeating_characters"
         ]
       }]
   },
