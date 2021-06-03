@@ -10,9 +10,7 @@ actionLink: /lesson/introduction_and_abcs
   style="max-width: 750px"
   title="练习 1：匹配字符"
   :data='[{type: "match", text: "abcdefg"}, {type: "match", text: "abcde"}, {type: "match", text: "abc"}]'
-  solution="输入前三个字符 {abc}。"
-  editorVal="abc"
   nextUrl="/lesson/introduction_and_abcs.html"
-/>
+>输入前三个字符 <SolutionLink text="abc" />。</Exercise>
 <div class="footer" style="border-top:none"><a
   href="https://regexone.com" target="_blank">regexone.com</a> 的中文翻译版本 (非官方), by <a href="https://github.com/imageslr" target="_blank">imageslr</a>, 2021.</div>

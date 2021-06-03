@@ -41,10 +41,7 @@
     <div
       class="solution"
       v-show="showAnswer"
-    >答案：{{ solutionPrefix }}<a
-        class="editor_val"
-        @click="input = solutionVal"
-      >{{ solutionVal }}</a>{{ solutionAppendix }}
+    ><slot></slot>
     </div>
     <div class="solution_hint">
       解决上述任务以继续下一个问题，或者查看<a
@@ -56,6 +53,7 @@
 </template>
 
 <script>
+import event from "../utils/event"
 export default {
   editorInputTimeoutTimer: null,
   editorLastInput: null,
@@ -73,24 +71,13 @@ export default {
       disabled: true,
     };
   },
-  computed: {
-    solutionVal () {
-      let res = this.solution.match(/(?<={).*(?=})/)
-      return res && res[0]
-    },
-    solutionPrefix () {
-      let res = this.solution.match(/.*(?={.*})/)
-      return res && res[0]
-    },
-    solutionAppendix () {
-      let res = this.solution.match(/(?<={.*}).*/)
-      return res && res[0]
-    },
-  },
   watch: {
     input () {
       this.update()
     }
+  },
+  mounted () {
+    event.$on("set-input", v => this.input = v)
   },
   methods: {
     update() {
@@ -154,8 +141,6 @@ export default {
     },
   },
 };
-
-function Problem(a, b, c, d) {}
 </script>
 
 <style lang="scss">
@@ -264,10 +249,6 @@ function Problem(a, b, c, d) {}
   font-size: 0.9em;
   border-radius: 0.25em 0.25em 0.25em 0.25em;
   background-color: #f5f5f5;
-}
-
-.editor_val {
-  cursor: pointer;
 }
 
 .solution_hint {

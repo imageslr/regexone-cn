@@ -11,6 +11,5 @@
 <Exercise 
   title="练习 1：匹配字母"
   :data='[{type: "match", text: "abcdefg"}, {type: "match", text: "abcde"}, {type: "match", text: "abc"}]'
-  solution="输入前三个字符 {abc}。"
   nextUrl="/lesson/letters_and_digits.html"
-/>
+>输入前三个字符 <SolutionLink text="abc" />。</Exercise>
