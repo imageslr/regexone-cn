@@ -4,6 +4,8 @@
 
 [在线阅读](https://imageslr.github.io/regexone-cn)
 
+<img widtg="650px" src="./assets/06-04-13-57-28.png" />
+
 **翻译约定：**
 * You -> 您
 * 专业术语，需要在括号中补充对应的英文单词
