@@ -210,7 +210,6 @@ export default {
     }
 
     &.result {
-      width: 2em;
       vertical-align: top;
       text-align: center;
       opacity: 0;

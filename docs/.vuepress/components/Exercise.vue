@@ -10,7 +10,7 @@
           <td class="task">Task</td>
           <td class="text">Text</td>
           <td v-if="hasGroup" class="groups">Capture Groups</td>
-          <td>Result</td>
+          <td class="result">Result</td>
         </tr>
         <Problem
           v-for="(item, index) in data"
@@ -202,6 +202,11 @@ function getDefauleNextUrl (site, page) {
 
       &.task {
         padding-right: 1.5em;
+        text-align: center;
+      }
+
+      &.result {
+        width: 4em;
         text-align: center;
       }
     }
