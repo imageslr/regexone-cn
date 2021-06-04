@@ -189,6 +189,7 @@ export default {
       width: 10em;
       font-size: 0.825em;
       padding-right: .5em;
+      white-space: nowrap;
 
       .group {
         display: inline-block;
