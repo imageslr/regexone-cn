@@ -9,13 +9,13 @@
         <tr class="problem_header">
           <td class="task">Task</td>
           <td class="text">Text</td>
+          <td v-if="hasGroup" class="groups">Capture Groups</td>
           <td>Result</td>
         </tr>
         <Problem
           v-for="(item, index) in data"
           :key="index"
-          :type="item.type"
-          :text="item.text"
+          :data="item"
           ref="problems"
         />
       </tbody>
@@ -74,6 +74,9 @@ export default {
   computed: {
     nextLink () {
       return this.nextUrl || getDefauleNextUrl(this.$site, this.$page)
+    },
+    hasGroup () {
+      return this.data.some(item => !!item.captureData)
     }
   },
   watch: {

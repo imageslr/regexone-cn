@@ -9,6 +9,19 @@
       v-html="textHtml"
     />
     <td
+      v-if="captureData"
+      class="groups"
+    >
+      <span
+        v-for="(item, i) in captureData.results"
+        :key="item"
+        class="group"
+        :class="{succeeded: groupSucceed[i]}"
+        v-text="item"
+        ref="groups"
+      />
+    </td>
+    <td
       class="result"
       :class="{ succeed: status, failed: !status }"
       v-text="result"
@@ -17,17 +30,29 @@
 </template>
 
 <script>
+import _ from "lodash";
 export default {
   props: {
-    type: String,
-    text: String,
+    data: Object,
   },
   data() {
     return {
       result: "",
-      textHtml: this.text,
+      textHtml: this.data.text,
+      groupSucceed: [],
       status: false, // succeed or failed
     };
+  },
+  computed: {
+    type() {
+      return this.data.type;
+    },
+    text() {
+      return this.data.text;
+    },
+    captureData() {
+      return this.data.captureData;
+    },
   },
   methods: {
     clearResult() {
@@ -66,6 +91,20 @@ export default {
             this.textHtml = html;
           }
           if (null != res1) {
+            if (this.captureData) {
+              var matched = res1.slice(1, res1.length),
+                inter = _.intersection(matched, this.captureData.results),
+                diff = _.difference(this.captureData.results, inter);
+              this.$refs.groups.forEach((k, i) => {
+                let c =
+                  k.innerText - 1 != _.indexOf(inter, c)
+                    ? this.markGroupMatched(i)
+                    : -1 != _.indexOf(diff, c) && this.markGroupMissed(i);
+              });
+              return 0 == diff.length
+                ? this.markSucceeded()
+                : this.markFailed();
+            }
             return this.markSucceeded();
           }
           null != res2 ? this.clearNonTextResult() : this.clearResult();
@@ -97,6 +136,12 @@ export default {
       this.result = "Failed";
       this.status = false;
       return false;
+    },
+    markGroupMatched(i) {
+      return this.groupSucceed[i] = true
+    },
+    markGroupMissed(a) {
+      return this.groupSucceed[i] = false;
     },
     escapeHtml(s) {
       return s
@@ -137,6 +182,30 @@ export default {
 
       .match_failed {
         color: #f66;
+      }
+    }
+
+    &.groups {
+      width: 10em;
+      font-size: 0.825em;
+      padding-right: .5em;
+
+      .group {
+        display: inline-block;
+        padding: 0.25em 0.5em;
+        background: #f5f5f5;
+        border-radius: 0.25em 0.25em 0.25em 0.25em;
+        transition: background-color 225ms, color 225ms;
+
+        + .group {
+          margin-left: 0.25em;
+        }
+
+        &.succeeded {
+          background: #42b983;
+          color: white;
+          transition: background-color 225ms, color 225ms;
+        }
       }
     }
 

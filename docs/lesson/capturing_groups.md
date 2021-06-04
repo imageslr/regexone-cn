@@ -8,5 +8,8 @@
 
 <Exercise
   title="练习 11：捕获组"
-  :data='[{type: "capture", text: "file_record_transcript.pdf"}, {type: "capture", text: "file_07241999.pdf"}, {type: "skip", text: "testfile_fake.pdf.tmp"}]'
+  :data='[
+    {type: "capture", text: "file_record_transcript.pdf", captureData: {results: ["file_record_transcript"]}}, 
+    {type: "capture", text: "file_07241999.pdf", captureData: {results: ["file_07241999"]}}, 
+    {type: "skip", text: "testfile_fake.pdf.tmp"}]'
 >我们只想捕获以 "file" 开始并具有文件扩展名 ".pdf" 的行，因此我们可以编写一个简单的模式来捕获从开头的 "file" 到扩展名之间的所有内容，比如 <SolutionLink text="^(file.+)\.pdf$" />。</Exercise>
