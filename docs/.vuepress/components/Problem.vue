@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       result: "",
-      textHtml: this.data.text,
+      textHtml: this.escapeHtml(this.data.text),
       groupSucceed: [],
       status: false, // succeed or failed
     };
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     clearResult() {
-      this.textHtml = this.text;
+      this.textHtml = this.escapeHtml(this.data.text);
       this.clearNonTextResult();
     },
     clearNonTextResult() {
