@@ -280,12 +280,16 @@ function getDefauleNextUrl (site, page) {
   border-radius: 0.25em 0.25em 0.25em 0.25em;
   background-color: #f5f5f5;
 
-  > *:first-child {
-    margin-top: 0;
-  }
+  > * {
+    margin-top: .75em;
+    margin-bottom: .75em;
 
-  > *:last-child {
-    margin-bottom: 0;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
