@@ -11,4 +11,9 @@
 <Exercise
   title="练习 12：匹配嵌套组"
   :data='[{type: "capture", text: "Jan 1987", captureData: {results: ["Jan 1987", "1987"]}}, {type: "capture", text: "May 1969", captureData: {results: ["May 1969", "1969"]}}, {type: "capture", text: "Aug 2011", captureData: {results: ["Aug 2011", "2011"]}}]'
->这个表达式需要捕获两部分数据，即年份和整个日期。这需要使用嵌套的捕获组，如表达式 <SolutionLink text="(\w+ (\d+))" /> 所示。<br>我们也可以使用 \s+ 来代替空格，以捕获月份和年份之间任意数量的空格。</Exercise>
+>
+这个表达式需要捕获两部分数据，即年份和整个日期。这需要使用嵌套的捕获组，如表达式 <SolutionLink text="(\w+ (\d+))" /> 所示。
+
+我们也可以使用 \s+ 来代替空格，以捕获月份和年份之间任意数量的空格。
+
+</Exercise>

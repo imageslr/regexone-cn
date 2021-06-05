@@ -11,4 +11,9 @@
 <Exercise
   title="练习 8：匹配可选字符"
   :data='[{type: "match", text: "1 file found?"},{type: "match", text: "2 files found?"},{type: "match", text: "24 files found?"},{type: "skip", text: "No files found."},]'
->我们可以使用元字符 '\d' 来匹配文件的数量，并使用表达式 <SolutionLink text="\d+ files? found\?" /> 来匹配找到文件的所有行。<br>请注意，第一个问号用于前面的 "s" 字符 (表示复数)，最后的问号必须转义以匹配文本。</Exercise>
+>
+我们可以使用元字符 '\d' 来匹配文件的数量，并使用表达式 <SolutionLink text="\d+ files? found\?" /> 来匹配找到文件的所有行。
+
+请注意，第一个问号用于前面的 "s" 字符 (表示复数)，最后的问号必须转义以匹配文本。
+
+</Exercise>

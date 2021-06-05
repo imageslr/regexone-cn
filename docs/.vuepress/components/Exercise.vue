@@ -279,6 +279,14 @@ function getDefauleNextUrl (site, page) {
   font-size: 0.9em;
   border-radius: 0.25em 0.25em 0.25em 0.25em;
   background-color: #f5f5f5;
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .solution_hint {

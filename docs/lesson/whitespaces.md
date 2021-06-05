@@ -9,4 +9,9 @@
 <Exercise
   title="练习 9：匹配空白符"
   :data='[{type: "match", text: "1.   abc"}, {type: "match", text: "2.	abc"}, {type: "match", text: "3.           abc"}, {type: "skip", text: "4.abc"}]'
->我们要匹配的是标号和 "abc" 之间有空格的行，也就是前三行。我们可以使用表达式 <SolutionLink text="\d\.\s+abc" /> 来匹配数字、实际句点 (必须转义)、一个或多个空白符，然后匹配文本。<br>如果我们用 <code>*</code> 代替 <code>+</code>，我们也会匹配到第四行，但实际上我们想跳过它。</Exercise>
+>
+我们要匹配的是标号和 "abc" 之间有空格的行，也就是前三行。我们可以使用表达式 <SolutionLink text="\d\.\s+abc" /> 来匹配数字、实际句点 (必须转义)、一个或多个空白符，然后匹配文本。
+
+如果我们用 `*` 代替 `+`，我们也会匹配到第四行，但实际上我们想跳过它。
+
+</Exercise>

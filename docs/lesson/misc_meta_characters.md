@@ -21,4 +21,9 @@
 <Exercise
   title="练习 15：匹配其他特殊字符"
   :data='[{type: "match", text: "The quick brown fox jumps over the lazy dog."}, {type: "match", text: "There were 614 instances of students getting 90.0% or above."}, {type: "match", text: "The FCC had to censor the network for saying &$#*@!."}]'
->这节课的练习更像是一个沙盒，提供了一些示例文本。最简单的答案可以是 <SolutionLink text=".*" /> :) <br>译者注：试试看 <SolutionLink text="\w+\b" />，<SolutionLink text="[^\d\s\w]+" /></Exercise>
+>
+这节课的练习更像是一个沙盒，提供了一些示例文本。最简单的答案可以是 <SolutionLink text=".*" /> :) 
+
+译者注：试试看 <SolutionLink text="\w+\b" />，<SolutionLink text="[^\d\s\w]+" />
+
+</Exercise>

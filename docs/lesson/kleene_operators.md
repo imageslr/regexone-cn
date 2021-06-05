@@ -11,4 +11,9 @@
 <Exercise
   title="练习 7：匹配重复字符"
   :data='[{type: "match", text: "aaaabcc"}, {type: "match", text: "aabbbbc"}, {type: "match", text: "aacc"}, {type: "skip", text: "a"}]'
->要匹配的字符串中，有至少两个 'a'、0 个或多个 'b'、至少一个 'c'，因此可以使用表达式 <SolutionLink text="aa+b*c+" /> 来表示。<br />或者，一个限制性更强的表达式是 <SolutionLink text="a{2,4}b{0,4}c{1,2}" />，它为每个字符的数量都设置了一个上限和下限。</Exercise>
+>
+要匹配的字符串中，有至少两个 'a'、0 个或多个 'b'、至少一个 'c'，因此可以使用表达式 <SolutionLink text="aa+b*c+" /> 来表示。
+
+或者，一个限制性更强的表达式是 <SolutionLink text="a{2,4}b{0,4}c{1,2}" />，它为每个字符的数量都设置了一个上限和下限。
+
+</Exercise>
