@@ -16,6 +16,7 @@
           v-for="(item, index) in data"
           :key="index"
           :data="item"
+          :hasGroup="hasGroup"
           ref="problems"
         />
       </tbody>

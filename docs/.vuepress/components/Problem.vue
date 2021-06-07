@@ -9,16 +9,15 @@
       v-html="textHtml"
     />
     <td
-      v-if="captureData"
+      v-if="hasGroup"
       class="groups"
     >
       <span
-        v-for="(item, i) in captureData.results"
+        v-for="(item, i) in captureData && captureData.results"
         :key="item"
         class="group"
         :class="{succeeded: groupSucceed[i]}"
         v-text="item"
-        ref="groups"
       />
     </td>
     <td
@@ -34,6 +33,7 @@ import _ from "lodash";
 export default {
   props: {
     data: Object,
+    hasGroup: Boolean,
   },
   data() {
     return {
@@ -61,6 +61,7 @@ export default {
     },
     clearNonTextResult() {
       this.result = "";
+      this.groupSucceed = []
     },
     verifyInput(input, pattern) {
       try {
@@ -95,11 +96,10 @@ export default {
               var matched = res1.slice(1, res1.length),
                 inter = _.intersection(matched, this.captureData.results),
                 diff = _.difference(this.captureData.results, inter);
-              this.$refs.groups.forEach((k, i) => {
-                let c =
-                  k.innerText - 1 != _.indexOf(inter, c)
-                    ? this.markGroupMatched(i)
-                    : -1 != _.indexOf(diff, c) && this.markGroupMissed(i);
+              this.captureData.results.forEach((c, i) => {
+                -1 != _.indexOf(inter, c)
+                  ? this.markGroupMatched(i)
+                  : -1 != _.indexOf(diff, c) && this.markGroupMissed(i);
               });
               return 0 == diff.length
                 ? this.markSucceeded()
@@ -124,7 +124,9 @@ export default {
           return this.markFailed();
         }
         alert("Invalid type");
-      } catch (_) {}
+      } catch (_) {
+        console.log(_)
+      }
       return false;
     },
     markSucceeded() {
@@ -138,10 +140,12 @@ export default {
       return false;
     },
     markGroupMatched(i) {
-      return this.groupSucceed[i] = true
+      this.$set(this.groupSucceed, i, true);
+      return true
     },
-    markGroupMissed(a) {
-      return this.groupSucceed[i] = false;
+    markGroupMissed(i) {
+      this.$set(this.groupSucceed, i, false);
+      return false
     },
     escapeHtml(s) {
       return s
@@ -188,7 +192,7 @@ export default {
     &.groups {
       width: 10em;
       font-size: 0.825em;
-      padding-right: .5em;
+      padding-right: 0.5em;
       white-space: nowrap;
 
       .group {
