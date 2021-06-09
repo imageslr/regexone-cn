@@ -193,7 +193,6 @@ export default {
       width: 10em;
       font-size: 0.825em;
       padding-right: 0.5em;
-      white-space: nowrap;
 
       .group {
         display: inline-block;
@@ -201,10 +200,9 @@ export default {
         background: #f5f5f5;
         border-radius: 0.25em 0.25em 0.25em 0.25em;
         transition: background-color 225ms, color 225ms;
-
-        + .group {
-          margin-left: 0.25em;
-        }
+        white-space: nowrap;
+        margin-top: 0.25em;
+        margin-right: 0.25em;
 
         &.succeeded {
           background: #42b983;

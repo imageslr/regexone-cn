@@ -4,23 +4,28 @@
       class="title"
       v-text="title"
     />
-    <table class="tasks_table">
-      <tbody>
-        <tr class="problem_header">
-          <td class="task">Task</td>
-          <td class="text">Text</td>
-          <td v-if="hasGroup" class="groups">Capture Groups</td>
-          <td class="result">Result</td>
-        </tr>
-        <Problem
-          v-for="(item, index) in data"
-          :key="index"
-          :data="item"
-          :hasGroup="hasGroup"
-          ref="problems"
-        />
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table class="tasks_table">
+        <tbody>
+          <tr class="problem_header">
+            <td class="task">Task</td>
+            <td class="text">Text</td>
+            <td
+              v-if="hasGroup"
+              class="groups"
+            >Capture Groups</td>
+            <td class="result">Result</td>
+          </tr>
+          <Problem
+            v-for="(item, index) in data"
+            :key="index"
+            :data="item"
+            :hasGroup="hasGroup"
+            ref="problems"
+          />
+        </tbody>
+      </table>
+    </div>
     <div class="input_and_continue">
       <input
         class="exercise_input_field"
@@ -42,7 +47,8 @@
     <div
       class="solution"
       v-show="showAnswer"
-    ><slot></slot>
+    >
+      <slot></slot>
     </div>
     <div class="solution_hint">
       解决上述任务以继续下一个问题，或者查看<a
@@ -54,7 +60,7 @@
 </template>
 
 <script>
-import event from "../utils/event"
+import event from "../utils/event";
 export default {
   editorInputTimeoutTimer: null,
   editorLastInput: null,
@@ -63,7 +69,7 @@ export default {
     data: Array,
     title: String,
     solution: String,
-    nextUrl: String
+    nextUrl: String,
   },
   data() {
     return {
@@ -73,20 +79,20 @@ export default {
     };
   },
   computed: {
-    nextLink () {
-      return this.nextUrl || getDefauleNextUrl(this.$site, this.$page)
+    nextLink() {
+      return this.nextUrl || getDefauleNextUrl(this.$site, this.$page);
     },
-    hasGroup () {
-      return this.data.some(item => !!item.captureData)
-    }
+    hasGroup() {
+      return this.data.some((item) => !!item.captureData);
+    },
   },
   watch: {
-    input () {
-      this.update()
-    }
+    input() {
+      this.update();
+    },
   },
-  mounted () {
-    event.$on("set-input", v => this.input = v)
+  mounted() {
+    event.$on("set-input", (v) => (this.input = v));
   },
   methods: {
     update() {
@@ -100,14 +106,26 @@ export default {
     updateFromInput() {
       var { input } = this.$data;
       if (input != this.editorLastInput) {
-        var pattern = this.recurseCompletePattern(input, 0, input.length, null)[1];
+        var pattern = this.recurseCompletePattern(
+          input,
+          0,
+          input.length,
+          null
+        )[1];
         var verify = true;
-        this.$refs.problems.forEach(k => verify = k.verifyInput(input, pattern) && verify)
+        this.$refs.problems.forEach(
+          (k) => (verify = k.verifyInput(input, pattern) && verify)
+        );
         verify ? (this.disabled = false) : (this.disabled = true);
         this.editorLastInput = input;
       }
     },
-    recurseCompletePattern(a /* input */, c/* i */, b/* input.length */, d/* appendix */) {
+    recurseCompletePattern(
+      a /* input */,
+      c /* i */,
+      b /* input.length */,
+      d /* appendix */
+    ) {
       for (var g = "", k = b, e = c; e <= b; e++) {
         var f = "";
         0 < e && (f = a.charAt(e - 1));
@@ -151,21 +169,21 @@ export default {
   },
 };
 
-function getDefauleNextUrl (site, page) {
-  const { sidebar } = site.themeConfig
-  const { regularPath } = page
-  let currentPath = regularPath.match(/^(.*).html$/)[1]
-  let nextPath = null
-  sidebar.some(group => {
+function getDefauleNextUrl(site, page) {
+  const { sidebar } = site.themeConfig;
+  const { regularPath } = page;
+  let currentPath = regularPath.match(/^(.*).html$/)[1];
+  let nextPath = null;
+  sidebar.some((group) => {
     return group.children.some((link, i) => {
       if (link == currentPath) {
-        nextPath = group.children[i+1] + ".html" || null
-        return true
+        nextPath = group.children[i + 1] + ".html" || null;
+        return true;
       }
-      return false
-    })
-  })
-  return nextPath
+      return false;
+    });
+  });
+  return nextPath;
 }
 </script>
 
@@ -186,36 +204,41 @@ function getDefauleNextUrl (site, page) {
   color: #757575;
 }
 
-.tasks_table {
+.table-container {
   width: 100%;
-  display: table;
+  overflow-x: auto;
 
-  .problem_header {
-    border: none;
+  .tasks_table {
+    min-width: 100%;
+    display: table;
 
-    td {
-      padding: 0.25em 0;
-      font: bold 0.9em "Ruda", "Segoe UI", "Calibri", "Trebuchet MS", Helvetica,
-        Verdana, sans-serif;
-      color: #444;
+    .problem_header {
       border: none;
-      border-bottom: 1px solid #dcdcdc;
 
-      &.task {
-        padding-right: 1.5em;
-        text-align: center;
-      }
+      td {
+        padding: 0.25em 0;
+        font: bold 0.9em "Ruda", "Segoe UI", "Calibri", "Trebuchet MS",
+          Helvetica, Verdana, sans-serif;
+        color: #444;
+        border: none;
+        border-bottom: 1px solid #dcdcdc;
 
-      &.result {
-        width: 4em;
-        text-align: center;
+        &.task {
+          padding-right: 1.5em;
+          text-align: center;
+        }
+
+        &.result {
+          width: 4em;
+          text-align: center;
+        }
       }
     }
-  }
 
-  tr {
-    background-color: transparent;
-    border: none;
+    tr {
+      background-color: transparent;
+      border: none;
+    }
   }
 }
 
@@ -282,8 +305,8 @@ function getDefauleNextUrl (site, page) {
   background-color: #f5f5f5;
 
   > * {
-    margin-top: .75em;
-    margin-bottom: .75em;
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
 
     &:first-child {
       margin-top: 0;
