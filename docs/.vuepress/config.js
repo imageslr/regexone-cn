@@ -1,3 +1,5 @@
+const { removePlugin, PLUGINS } = require('@vuepress/markdown')
+
 module.exports = {
   base: "/regexone-cn/",
 
@@ -62,6 +64,10 @@ module.exports = {
       },
     ],
   },
+
+  chainMarkdown (config) {
+    removePlugin(config, PLUGINS.EMOJI)
+  }
 };
 
 function googleAnalytics() {
