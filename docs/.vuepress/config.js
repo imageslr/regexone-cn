@@ -6,6 +6,17 @@ module.exports = {
   title: "RegexOne 中文 - 通过简单的交互式练习来学习正则表达式",
   description: "通过简单的交互式练习来学习正则表达式｜regexone.com 中文翻译",
   head: [
+    ['link', { rel: 'icon', href: '/favicon.png' }],
+    ['link', { rel: 'manifest', href: '/manifest.webmanifest' }],
+    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'default' }],
+    ['link', { rel: 'apple-touch-icon', href: `/images/icons/apple-touch-icon.png` }],
+    ['link', { rel: 'mask-icon', href: '/images/icons/safari-pinned-tab.svg', color: '#3eaf7c' }],
+    ['meta', { name: 'msapplication-TileColor', content: '#3eaf7c' }],
+    ['meta', { name: 'msapplication-TileImage', content: '/images/icons/mstile-150x150.png' }],
+    ['meta', { name: 'application-name', content: 'RegexOne' }],
+    ['meta', { name: 'apple-mobile-web-app-title', content: 'RegexOne' }],
     [
       "link",
       { rel: "shortcut icon", type: "image/x-icon", href: `/favicon.png` },
@@ -67,6 +78,13 @@ module.exports = {
 
   chainMarkdown (config) {
     removePlugin(config, PLUGINS.EMOJI)
+  },
+
+  plugins: {
+    '@vuepress/pwa': {
+      serviceWorker: true,
+      updatePopup: true
+    }
   }
 };
 

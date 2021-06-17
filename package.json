@@ -9,6 +9,7 @@
   "author": "imageslr",
   "license": "MIT",
   "devDependencies": {
+    "@vuepress/plugin-pwa": "^1.8.2",
     "lodash": "^4.17.21",
     "node-sass": "^6.0.0",
     "sass-loader": "^10.0.1",
