@@ -6,14 +6,13 @@
 </template>
 
 <script>
-import event from "../utils/event"
 export default {
   props: {
     text: String
   },
   methods: {
     click () {
-      event.$emit("set-input", this.text)
+      this.$parent.$emit("set-input", this.text)
     }
   }
 }

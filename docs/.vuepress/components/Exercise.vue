@@ -60,7 +60,6 @@
 </template>
 
 <script>
-import event from "../utils/event";
 export default {
   editorInputTimeoutTimer: null,
   editorLastInput: null,
@@ -92,7 +91,7 @@ export default {
     },
   },
   mounted() {
-    event.$on("set-input", (v) => (this.input = v));
+    this.$on("set-input", (v) => (this.input = v));
   },
   methods: {
     update() {
