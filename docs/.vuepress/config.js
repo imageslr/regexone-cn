@@ -78,6 +78,7 @@ module.exports = {
         children: [
           "/lesson/back_referencing",
           "/lesson/assertion",
+          "/lesson/non_capture_group",
           "/lesson/greeding"
         ]
       }

@@ -16,7 +16,7 @@
         v-for="(item, i) in captureData && captureData.results"
         :key="item"
         class="group"
-        :class="{succeeded: groupSucceed[i]}"
+        :class="{succeeded: groupSucceed[i], error: groupError[i]}"
         v-text="item"
       />
     </td>
@@ -40,6 +40,7 @@ export default {
       result: "",
       textHtml: this.escapeHtml(this.data.text),
       groupSucceed: [],
+      groupError: [],
       status: false, // succeed or failed
     };
   },
@@ -53,6 +54,9 @@ export default {
     captureData() {
       return this.data.captureData;
     },
+    isNonCaptureGroup() {
+      return this.data.captureData && this.data.captureData.nonCapture;
+    },
   },
   methods: {
     clearResult() {
@@ -61,7 +65,8 @@ export default {
     },
     clearNonTextResult() {
       this.result = "";
-      this.groupSucceed = []
+      this.groupSucceed = [];
+      this.groupError = [];
     },
     verifyInput(input, pattern) {
       try {
@@ -101,9 +106,15 @@ export default {
                   ? this.markGroupMatched(i)
                   : -1 != _.indexOf(diff, c) && this.markGroupMissed(i);
               });
-              return 0 == diff.length
-                ? this.markSucceeded()
-                : this.markFailed();
+              if (this.isNonCaptureGroup) {
+                return 0 == inter.length
+                  ? this.markSucceeded()
+                  : this.markFailed();
+              } else {
+                return 0 == diff.length
+                  ? this.markSucceeded()
+                  : this.markFailed();
+              }
             }
             return this.markSucceeded();
           }
@@ -125,7 +136,7 @@ export default {
         }
         alert("Invalid type");
       } catch (_) {
-        console.log(_)
+        console.log(_);
       }
       return false;
     },
@@ -140,12 +151,18 @@ export default {
       return false;
     },
     markGroupMatched(i) {
-      this.$set(this.groupSucceed, i, true);
-      return true
+      if (this.isNonCaptureGroup) {
+        this.$set(this.groupError, i, true);
+      } else {
+        this.$set(this.groupSucceed, i, true);
+      }
     },
     markGroupMissed(i) {
-      this.$set(this.groupSucceed, i, false);
-      return false
+      if (this.isNonCaptureGroup) {
+        this.$set(this.groupError, i, false);
+      } else {
+        this.$set(this.groupSucceed, i, false);
+      }
     },
     escapeHtml(s) {
       return s
@@ -206,6 +223,12 @@ export default {
 
         &.succeeded {
           background: #42b983;
+          color: white;
+          transition: background-color 225ms, color 225ms;
+        }
+
+        &.error {
+          background: #f66;
           color: white;
           transition: background-color 225ms, color 225ms;
         }
