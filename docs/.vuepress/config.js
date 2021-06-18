@@ -55,7 +55,7 @@ module.exports = {
           "/lesson/more_groups",
           "/lesson/conditionals",
           "/lesson/misc_meta_characters",
-          "/lesson/end",
+          "/lesson/end"
         ],
       },
       {
@@ -73,6 +73,14 @@ module.exports = {
           "/problem/complete",
         ],
       },
+      {
+        title: "进阶课程",
+        children: [
+          "/lesson/back_referencing",
+          "/lesson/assertion",
+          "/lesson/greeding"
+        ]
+      }
     ],
   },
 
