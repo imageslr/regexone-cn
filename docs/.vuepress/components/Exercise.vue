@@ -38,6 +38,13 @@
         v-model="input"
       >
       <button
+        v-if="noNext"
+        class="continue"
+        :class="{ disabled }"
+        :disabled="disabled"
+      >Continue ›</button>
+      <button
+        v-else
         class="continue"
         :class="{ disabled }"
         :disabled="disabled"
@@ -68,6 +75,10 @@ export default {
     data: Array,
     title: String,
     solution: String,
+    noNext: {
+      type: Boolean,
+      default: false
+    },
     nextUrl: String,
   },
   data() {
@@ -199,7 +210,7 @@ function getDefauleNextUrl(site, page) {
 .title {
   padding-bottom: 0.5em;
   font-size: 0.9em;
-  text-transform: capitalize;
+  // text-transform: capitalize;
   color: #757575;
 }
 
