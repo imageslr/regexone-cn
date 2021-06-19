@@ -7,4 +7,4 @@
 * [PHP](https://regexone.com/references/php)
 * [Python](https://regexone.com/references/python)
 
-如果您对如何改进网站有任何疑问或建议，请随时通过 [Github Issue](https://github.com/imageslr/regexone-cn/issues) 或电子邮件 ([elonzzz@163.com](mailto://elonzzz@163.com)) 联系!
+如果您对如何改进网站有任何疑问或建议，请随时通过 [Github Issue](https://github.com/imageslr/regexone-cn/issues) 或电子邮件 ([elonzzz@163.com](mailto://elonzzz@163.com)) 联系！

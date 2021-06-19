@@ -187,7 +187,11 @@ function getDefauleNextUrl(site, page) {
   sidebar.some((group) => {
     return group.children.some((link, i) => {
       if (link == currentPath) {
-        nextPath = group.children[i + 1] + ".html" || null;
+        if (group.children[i + 1]) {
+          nextPath = group.children[i + 1] + ".html";
+        } else {
+          nextPath = "/" // 没有下一个链接，就跳回主页
+        }
         return true;
       }
       return false;
