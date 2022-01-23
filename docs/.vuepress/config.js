@@ -31,6 +31,7 @@ module.exports = {
     nav: [
       { text: "课程", link: "/lesson/introduction_and_abcs" },
       { text: "问题", link: "/problem/matching_decimal_numbers" },
+      { text: "资源", link: "/resources"},
       { text: "RegexOne 官方网站", link: "https://regexone.com" },
     ],
 
@@ -82,7 +83,8 @@ module.exports = {
           "/lesson/greeding",
           "/lesson/xend"
         ]
-      }
+      },
+      '/resources'
     ],
   },
 
